@@ -11,6 +11,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header> */}
         <h1 className="App-intro">
+          Welcome to Quotely.
           Here is where the front-end of our app will live
         </h1>
       </div>
