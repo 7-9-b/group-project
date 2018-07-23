@@ -2,15 +2,11 @@ import React, { Component } from 'react'
 
 import { Route } from 'react-router-dom'
 
+import Form from './components/Form'
+
 const HomePage = () => (
     <div>
       <h2>Home</h2>
-    </div>
-  );
-  
-  const QuoteForm = () => (
-    <div>
-      <h2>QuoteForm</h2>
     </div>
   );
   
@@ -25,7 +21,7 @@ class Routes extends Component {
         return(
             <div>
                 <Route exact path="/" component={HomePage} />
-                <Route path="/quoteform" component={QuoteForm} />
+                <Route path="/quoteform" component={Form} />
                 <Route path="/feed" component={Feed} />
             </div>
         )

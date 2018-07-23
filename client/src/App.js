@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import QuoteForm from './components/Form'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import './App.css';
 
@@ -12,10 +11,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <h1 className="App-intro">
-            Welcome to Quotely.
-            Here is where the front-end of our app will live.
-          </h1>
+          <h1 className="App-intro">Quotely</h1>
         <hr />
           <h1> This is a temp navbar to test routing.</h1>
           <ul>
@@ -24,7 +20,6 @@ class App extends Component {
             <li><Link to='/feed'>Feed</Link></li>
           </ul>
           <Route />
-          <QuoteForm />
         </div>
       </Router>
     );

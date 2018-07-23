@@ -28,7 +28,6 @@ class QuoteForm extends Component {
         <form onSubmit={this.handleSubmit}>
 
         <Row className='center'>
-            <h5>Quote Form </h5>
             <Input label="Customer Name" s={6} value={this.state.value} onChange={this.handleChange}/>
             <Input s={12} type='select' label="Select Service" defaultValue='2'>
                 <option value='1'>Flooring</option>
