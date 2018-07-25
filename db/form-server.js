@@ -1,39 +1,20 @@
 const express = require('express')
-const parseurl = require('parseurl')
-const bodyParser = require('body-parser')
-const app = express()
-const path = require('path')
-const mongoose = require('mongoose')
-const url = 'mongodb://EzrahN:IKEAForce3@ds137611.mlab.com:37611/ikeafinal'
+const formPost = express()
 const Form = require('./form-schema')
-const db = mongoose.connection
 
-mongoose.connect(url, function(err, db){
-    if (err){
-        console.log(err)
-    } else {
-        console.log('Connected to database')
-    }
+formPost.post('/quoteform', function(req, res){
+    const form = new Form()
+        form.customerName = req.body.customerName
+        form.service = req.body.service
+        form.width = req.body.width
+        form.length = req.body.length
+        form.comments = req.body.comments
+
+    res.send(req.body)
 })
 
-db.once('open', function(){
-    console.log('Connected to the database')
-})
+module.exports = formPost
 
-db.on('error', function(err){
-    console.log(err)
-})
-
-app.post('/quoteform', function(req, res){
-    Form.create({
-        customerName: req.body.NameOfCustomer,
-        service: req.body.TypeOfService,
-        date: req.body.DateOfQuote,
-        comments: req.body.CommentsOfQuote
-    }).then(data => {
-        res.json(data)
-    })
-})
 
 
 
