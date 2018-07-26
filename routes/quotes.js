@@ -1,19 +1,19 @@
 const express = require('express')
-const formPost = express()
-const Form = require('./form-schema')
+const router = express.Router()
+const Quotes = require('../models/quotes-model')
 
-formPost.post('/quoteform', function(req, res){
-    const form = new Form()
+router.post('/quoteform', (req, res) => {
+    const form = new Quotes()
         form.customerName = req.body.customerName
         form.service = req.body.service
         form.width = req.body.width
         form.length = req.body.length
         form.comments = req.body.comments
 
-    res.send(req.body)
+        console.log(req.body)
 })
 
-module.exports = formPost
+module.exports = router
 
 
 
