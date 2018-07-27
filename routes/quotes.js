@@ -3,6 +3,8 @@ const router = express.Router()
 const Quotes = require('../models/quotes-model')
 
 router.post('/quoteform', (req, res) => {
+    console.log(req.body)
+
     const form = new Quotes()
         form.customerName = req.body.customerName
         form.service = req.body.service
@@ -10,7 +12,14 @@ router.post('/quoteform', (req, res) => {
         form.length = req.body.length
         form.comments = req.body.comments
 
-        console.log(req.body)
+    form.save((err) => {
+        if(err){
+            res.sendStatus(500)
+        } else {
+            res.sendStatus(200)
+        }
+    })
+
 })
 
 module.exports = router

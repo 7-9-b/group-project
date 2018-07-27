@@ -7,8 +7,12 @@ const quotesSchema = new Schema({
     width: Number,
     length: Number,
     comments: String,
+    date: {
+        type: Date,
+        default: new Date()
+    }
 })
 
-const Quotes = mongoose.model('Quotes', quotesSchema, 'quotes')
+const Quotes = mongoose.model('Quotes', quotesSchema, 'QuoteFormData')
 
 module.exports = Quotes

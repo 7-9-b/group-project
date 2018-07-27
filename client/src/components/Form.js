@@ -40,18 +40,17 @@ class QuoteForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        const submission = {
+        axios.post('/quoteform', {
             customerName: this.state.customerName,
             service: this.state.service,
             width: this.state.width,
             length: this.state.length,
             comments: this.state.comments
-        }
-
-        axios.post('/quoteform', {submission})
+        })
             .then(res => {
                 console.log(res)
-                console.log(res.data)
+                console.log(res.config.data)
+                console.log(res.headers.date)
             })
             .catch(err => {
                 console.log(err)
@@ -75,7 +74,7 @@ class QuoteForm extends Component {
             <Input 
                 type='text'
                 label="Customer Name" 
-                s={6} 
+                s={12} 
                 name='customerName' 
                 value={this.state.customerName} 
                 onChange={this.handleCustomerName} />
@@ -94,12 +93,14 @@ class QuoteForm extends Component {
             <Input 
                 type='number'
                 label='width'
+                s={6}
                 name='width'
                 value={this.state.width}
                 onChange={this.handleWidth} />
             <Input 
                 type='number'
                 label='length'
+                s={6}
                 name='length'
                 value={this.state.length}
                 onChange={this.handleLength} />

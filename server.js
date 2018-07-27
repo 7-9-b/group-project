@@ -6,13 +6,13 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors')
 
-// Routes
+// routes
 // const users = require('./routes/users')
 const router = require('./routes/quotes')
 
-// Database 
+// database setup
 const mongoose = require('mongoose')
-const url = 'mongodb://enyanat:password1@ds163769.mlab.com:63769/test-db'
+const url = 'mongodb://EzrahN:IKEAForce3@ds137611.mlab.com:37611/ikeafinal'
 const db = mongoose.connection
 
 mongoose.connect(url, {useNewUrlParser: true }, function(err, db){
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // app middleware
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 // app.use('/users', users)
