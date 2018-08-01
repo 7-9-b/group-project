@@ -15,6 +15,8 @@ class App extends Component {
         <hr />
           <h1> This is a temp navbar to test routing.</h1>
           <ul>
+            <li><Link to='/signup'>Sign Up</Link></li>
+            <li><Link to='/login'>Log In</Link></li>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/quoteform'>Quote Form</Link></li>
             <li><Link to='/feed'>Feed</Link></li>

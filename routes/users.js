@@ -1,9 +1,24 @@
-// const express = require('express')
-// const users = express.Router()
+const express = require('express')
+const router = express.Router()
+const User = require('../models/users-model')
+const passport = require('passport')
 
-// users.post('/register', (req, res) => {
-//     console.log(req.body)
-//     res.end()
-// })
+router.get('/signup', (req, res) => {
+    res.sendStatus(200)
+})
 
-// module.exports = users
+router.get('/login', (req, res) => {
+    res.sendStatus(200)
+})
+
+router.post('/signup', passport.authenticate('signup', {
+    successRedirect: '/login',
+    failureRedirect: '/signup'    
+    }))
+
+router.post('/login', passport.authenticate('login', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+    }))
+
+module.exports = router
