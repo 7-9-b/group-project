@@ -27,3 +27,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.bg-light{
+  background-color: blue important;
+}
+
+.navbar{
+  background-color: green important;
+}
