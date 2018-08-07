@@ -30,7 +30,7 @@ class LogInForm extends Component {
             password: this.state.password
         })
             .then(res => {
-                console.log(res)
+                console.log('Logged In!')
             })
             .catch(err => {
                 console.log(err)
