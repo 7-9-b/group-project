@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-
 import { Route } from 'react-router-dom'
 
-import Form from './components/Form'
+import QuoteForm from './components/Form'
+import SignUpForm from './components/Signup'
+import LogInForm from './components/Login'
 
 const HomePage = () => (
     <div>
@@ -21,8 +22,10 @@ class Routes extends Component {
         return(
             <div>
                 <Route exact path="/" component={HomePage} />
-                <Route path="/quoteform" component={Form} />
+                <Route path="/quoteform" component={QuoteForm} />
                 <Route path="/feed" component={Feed} />
+                <Route path="/signup" component={SignUpForm} />
+                <Route path='/login' component={LogInForm} />
             </div>
         )
     }

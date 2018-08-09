@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import '../styling/Form.css'
 
-import { Row, Input, Button} from 'react-materialize'
+import { Row, Input, Button } from 'react-materialize'
 
 class QuoteForm extends Component {
     constructor(props) {

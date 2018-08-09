@@ -1,14 +1,14 @@
 // module imports
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const app = express();
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors')
+const expressSession = require('express-session')
+const path = require('path');
+const passport = require('passport')
+const config = require('./passport')
 
-// routes
-// const users = require('./routes/users')
-const router = require('./routes/quotes')
 
 // database setup
 const mongoose = require('mongoose')
@@ -31,23 +31,36 @@ db.once('open', function(){
     console.log('Connected to the database')
 })
 
+
 // PRODUCTION ONLY
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+
+// routes
+const users = require('./routes/users')
+const quotes = require('./routes/quotes')
+
+
 // app middleware
-app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(cors())
+app.use(expressSession({ secret: 'quotelySecret', resave: false, saveUninitialized: false }))
 
-// app.use('/users', users)
-app.use('/', router)
+require('./passport')(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use('/', users)
+app.use('/', quotes)
 
 
 // PRODUCTION ONLY
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
+
 
 // Development mode port
 const port = process.env.PORT || 5000;
