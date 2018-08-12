@@ -10,7 +10,7 @@ router.post('./', (req,res) => {
   newFeed.service = req.body.service;
   newFeed.comments = req.body.comments;
   newFeed.quote = req.body.quote;
-  newFeed.save(err) => {
+  newFeed.save((err) => {
     if(err) {
       res.send(err) 
     } else {
@@ -20,10 +20,9 @@ router.post('./', (req,res) => {
 })
   
 router.get('./:id', (req,res) => {
-    Feed.find({owner: req.params.id}).then(orders) => {
+    Feed.find({owner: req.params.id}).then((orders) => {
       res.json(orders)
-    }
-})
+    })
 
 router.put('./:id', (req,res) => {
   Feed.findById(req.params.id, (err,Feed) => {
@@ -31,13 +30,14 @@ router.put('./:id', (req,res) => {
       res.send(err)
     } else {
       feed.description = req.body.newFeed;
-      feed.save(err) => {
+      feed.save((err) => {
         if(err) {
           res.send(err) 
         } else {
           res.sendStatus(200)
         }
-      }
+      })
     }
   })
+})
 })

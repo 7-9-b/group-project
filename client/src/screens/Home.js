@@ -19,32 +19,26 @@ class Home extends React.Component {
             })
         })
     }
-    
-    save() {
-        axios.post('/feed', this.state).then(() => {
-            window.location.reload()
-        })
-    }
 
-    edit(td) {
-        let newFeed = window.prompt('Update Feed: ${td.description}');
-        this.setState({newFeed: newFeed}, () => {
-            axios.put('/feed/${td._id}', this.state).then(() => {
-                window.location.reload();
-            })
-        })
-    }
-
-    delete(td) {
-        axios.delete('/feed/${td._id}').then(() => {
-            window.location.reload()
-        })
-    }
-
-    render() {
+     render() {
         return (
             <div>
-                <h1>
+                <h1>Previous Job Feed</h1>
+                <ul>
+                    {(this.state.feed) ? this.state.feed.map((feed, index) => (
+                        <li key={index}>
+                        {feed.owner}
+                        </li>
+                        <li key={index}>
+                        {feed.service}
+                        </li>
+                        <li key={index}>
+                        {feed.comment}
+                        </li>
+                    )) : null}
+                </ul>
+                </div>
         )
     }
 }
+export default Home;
