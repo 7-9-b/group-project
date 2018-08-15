@@ -3,11 +3,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const app = express();
+const mongoose = require ('mongoose');
 
 //models
 require('./models/user');
-require('.models/feed');
+require('./models/feed');
 
 let users = require('./routes/users');
 let feed = require('./routes/feed');
@@ -23,7 +25,7 @@ app.use(passport.initialize());
 app.use('/users', users);
 app.use('/feed', feed);
 
-mongoose.connect('mongodb://KimBailey:March-319@ds137611.mlab.com:37611/ikeafinal')
+mongoose.connect('mongodb://KimBailey:abc123@ds137611.mlab.com:37611/ikeafinal')
 
 // PRODUCTION ONLY
 // app.get('*', (req, res) => {

@@ -9,8 +9,8 @@ class Register extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 register() {
-    axious.post('/user/signup',this.state).then ((res) => {
-        localStorgae.setItem('token', res.data.token)
+    axios.post('/user/signup',this.state).then ((res) => {
+        localStorage.setItem('token', res.data.token)
         window.location.pathname = '/home';
     }) 
 }

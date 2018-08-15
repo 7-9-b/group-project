@@ -28,7 +28,7 @@ const Index = ({ pathname }) => {
 
 let pathname = window.location.pathname;
 
-REactSom.render(
+ReactDOM.render(
   <Index pathname={pathname} />,
   document.getElementById('root')
 )

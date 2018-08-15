@@ -26,8 +26,9 @@ class Home extends React.Component {
                 <h1>Previous Job Feed</h1>
                 <ul>
                     {(this.state.feed) ? this.state.feed.map((feed, index) => (
+                       <div>
                         <li key={index}>
-                        {feed.owner}
+                            {feed.owner}
                         </li>
                         <li key={index}>
                         {feed.service}
@@ -35,6 +36,7 @@ class Home extends React.Component {
                         <li key={index}>
                         {feed.comment}
                         </li>
+                       </div>
                     )) : null}
                 </ul>
                 </div>
