@@ -4,10 +4,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors')
-const expressSession = require('express-session')
 const path = require('path');
 const passport = require('passport')
-const config = require('./passport')
 
 
 // database setup
@@ -35,6 +33,9 @@ db.once('open', function(){
 // PRODUCTION ONLY
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+// models
+require('./models/users-model')
+require('./models/quotes-model')
 
 // routes
 const users = require('./routes/users')
@@ -46,12 +47,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors())
-app.use(expressSession({ secret: 'quotelySecret', resave: false, saveUninitialized: false }))
-
-require('./passport')(passport)
 app.use(passport.initialize())
-app.use(passport.session())
-
+require('./passport')(passport)
 app.use('/', users)
 app.use('/', quotes)
 

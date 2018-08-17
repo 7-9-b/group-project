@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import { BrowserRouter as Router, Link } from 'react-router-dom'
-import './App.css';
+import { Provider } from 'react-redux'
+import store from './store/store'
 
 import Route from './Routes'
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <h1 className="App-intro">Quotely</h1>
-        <hr />
-          <h1> This is a temp navbar to test routing.</h1>
-          <ul>
-            <li><Link to='/signup'>Sign Up</Link></li>
-            <li><Link to='/login'>Log In</Link></li>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/quoteform'>Quote Form</Link></li>
-            <li><Link to='/feed'>Feed</Link></li>
-          </ul>
+      <Provider store = {store} >
+        <Router>
+          <div className="App">
+            <h1 className="App-intro">Quotely</h1>
+            <hr />
+            <h1> This is a temp navbar to test routing.</h1>
+            <ul>
+              <li><Link to='/signup'>Sign Up</Link></li>
+              <li><Link to='/login'>Log In</Link></li>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/quoteform'>Quote Form</Link></li>
+              <li><Link to='/feed'>Feed</Link></li>
+            </ul>
           <Route />
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }

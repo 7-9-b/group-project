@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import '../styling/Form.css'
+import { connect } from 'react-redux'
+import { userLogIn } from '../actions/auth'
 
 import { Row, Input, Button } from 'react-materialize'
 
@@ -11,6 +13,7 @@ class LogInForm extends Component {
         this.state = {
             email: '',
             password: '',
+            errors: {}
         }
     }
 
@@ -24,17 +27,23 @@ class LogInForm extends Component {
 
     handleLogIn = (event) => {
         event.preventDefault()
-        
-        axios.post('/login', {
-            username: this.state.email,
+
+        const user = {
+            email: this.state.email,
             password: this.state.password
-        })
-            .then(res => {
-                console.log('Logged In!')
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        }
+        this.props.userLogIn(user)
+
+        // axios.post('/login', {
+        //     email: this.state.email, 
+        //     password: this.state.password
+        // })
+        //     .then(res => {
+        //         console.log('Logged In!')
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
 
         this.setState({
             email: '',
@@ -42,7 +51,17 @@ class LogInForm extends Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            })
+        }
+    }
+
     render() {
+        const { errors } = this.state
+
         return(
             <div>
             
@@ -55,6 +74,7 @@ class LogInForm extends Component {
                     name='email' 
                     value={this.state.email}
                     onChange={this.handleEmail} />
+                <div>{errors.email}</div>
                 <Input
                     type='password'
                     label='Password'
@@ -62,6 +82,7 @@ class LogInForm extends Component {
                     name='password'
                     value={this.state.password}
                     onChange={this.handlePassword} />
+                <div>{errors.password}</div>
             </Row>
 
             <Button waves='light'>Log In</Button>   
@@ -73,4 +94,8 @@ class LogInForm extends Component {
     }
 }
 
-export default LogInForm
+const mapStateToProps = (state) => ({
+    errors: state.errors
+})
+
+export default connect(mapStateToProps, { userLogIn })(LogInForm)
