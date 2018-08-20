@@ -30,7 +30,7 @@ router.post('/signup', (req, res) => {
         else {
             const newUser = new User({
                 email: req.body.email,
-                password: newUser.hashPassword(req.body.password)
+                password: req.body.password
             })
 
             // salt and hash password

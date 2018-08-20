@@ -33,6 +33,6 @@ const userSchema = new Schema({
 //     }, 'SecretKey')
 // })
 
-const User = mongoose.model('User', userSchema, 'testDB')
+const User = mongoose.model('User', userSchema, 'Users')
 
 module.exports = User
