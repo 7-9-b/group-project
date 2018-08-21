@@ -1,28 +1,57 @@
-const express = require('express')
-const router = express.Router()
-const Quotes = require('../models/quotes-model')
+let express = require('express');
+let mongoose = require('mongoose');
+let router = express.Router();
+let Quote = mongoose.model('Quote');
 
-router.post('/quoteform', (req, res) => {
-    console.log(req.body)
-
-    const form = new Quotes()
-        form.customerName = req.body.customerName
-        form.service = req.body.service
-        form.width = req.body.width
-        form.length = req.body.length
-        form.comments = req.body.comments
-
-    form.save((err) => {
-        if(err){
-            res.sendStatus(500)
+router.post('/', (req, res) => {
+    let newQuote = new Quote();
+    newQuote.name = req.body.name;
+    newQuote.phone = req.body.phone;
+    newQuote.service = req.body.service;
+    newQuote.comments = req.body.comments;
+    newQuote.save((err) => {
+        if(err) {
+            res.send(err)
         } else {
             res.sendStatus(200)
         }
     })
-
 })
 
-module.exports = router
+router.get('/', (req, res) => {
+    Quote.find({}).then((quotes) => {
+        res.json(quotes)
+    })
+})
+
+router.put('/:id', (req, res) => {
+    Quote.findById(req.params.id, (err, quote) => {
+        if(err) {
+            res.send(err)
+        } else {
+            quote.service = req.body.newQuote;
+            quote.save((err) => {
+                if(err) {
+                    res.send(err)
+                } else {
+                    res.sendStatus(200)
+                }
+            })
+        }
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    Quote.deleteOne({_id: req.params.id}, (err) => {
+        if(err) {
+            res.send(err)
+        } else {
+            res.sendStatus(200)
+        }
+    })
+})
+
+module.exports = router;
 
 
 
