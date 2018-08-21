@@ -11,7 +11,7 @@ const passport = require('passport')
 
 // database setup
 const mongoose = require('mongoose')
-const url = 'mongodb://EzrahN:IKEAForce3@ds137611.mlab.com:37611/ikeafinal'
+const url = 'mongodb://isaac:abc123@ds127342.mlab.com:27342/final-project-db';
 const db = mongoose.connection
 
 mongoose.connect(url, {useNewUrlParser: true }, function(err, db){
@@ -53,8 +53,8 @@ require('./passport')(passport)
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', users)
-app.use('/', quotes)
+app.use('/users', users)
+app.use('/quotes', quotes)
 
 
 // PRODUCTION ONLY

@@ -1,18 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const quotesSchema = new Schema({
-    customerName: String,
+const QuoteSchema = new Schema({
+    name: String,
+    phone: String,
     service: String,
-    width: Number,
-    length: Number,
-    comments: String,
-    date: {
-        type: Date,
-        default: new Date()
-    }
+    comments: String
 })
 
-const Quotes = mongoose.model('Quotes', quotesSchema, 'QuoteFormData')
+const Quote = mongoose.model('Quote', QuoteSchema)
 
-module.exports = Quotes
+module.exports = Quote;
