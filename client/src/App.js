@@ -15,13 +15,10 @@ class App extends Component {
           <div className="App">
             <h1 className="App-intro">Quotely</h1>
           <hr />
-          <h1> This is a temp navbar to test routing.</h1>
           <ul>
             <li><Link to='/signup'>Sign Up</Link></li>
             <li><Link to='/login'>Log In</Link></li>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/quoteform'>Quote Form</Link></li>
-            <li><Link to='/feed'>Feed</Link></li>
+            <li><Link to='/quoteform'>Quotes</Link></li>
           </ul>
         <Route />
         </div>
