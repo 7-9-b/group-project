@@ -29,7 +29,7 @@ class SignUpForm extends Component {
             <div>
                 <input name="userEmail" placeholder="email..." onChange={(e) => this.setValue(e)} />
                 <input name="userPassword" placeholder="password" onChange={(e) => this.setValue(e)} />
-                <button onClick={() => this.signup()}>submit</button>
+                <Button onClick={() => this.signup()}>submit</Button>
             </div>
         )
     }

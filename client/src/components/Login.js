@@ -29,7 +29,7 @@ class LogInForm extends Component {
             <div>
                 <input name="userEmail" placeholder="email..." onChange={(e) => this.setValue(e)} />
                 <input name="userPassword" placeholder="password" onChange={(e) => this.setValue(e)} />
-                <button onClick={() => this.login()}>submit</button>
+                <Button onClick={() => this.login()}>submit</Button>
             </div>
         )
     }
