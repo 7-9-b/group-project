@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import '../styling/Form.css'
+// import axios from 'axios'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { userSignUp } from '../actions/auth'
 
 import { Row, Input, Button } from 'react-materialize'
 
@@ -11,7 +14,8 @@ class SignUpForm extends Component {
         this.state = {
             email: '',
             password: '',
-            confirmPassword:''
+            confirmPassword:'',
+            errors: {}
         }
     }
 
@@ -30,16 +34,25 @@ class SignUpForm extends Component {
     handleSignUp = (event) => {
         event.preventDefault()
 
-        axios.post('/signup', {
-            email: this.state.email,
-            password: this.state.password
-        })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const user = {
+            email: this.state.email, 
+            password: this.state.password,
+            confirmPassword: this.state.confirmPassword
+        }
+
+        this.props.userSignUp(user, this.props.history)
+
+        // axios.post('/signup', {
+        //     email: this.state.email,
+        //     password: this.state.password,
+        //     confirmPassword: this.state.confirmPassword
+        // })
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
         
         this.setState({
             email: '',
@@ -48,7 +61,17 @@ class SignUpForm extends Component {
         })
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            })
+        }
+    }
+
     render() {
+        const { errors } = this.state
+
         return(
             <div>
             
@@ -61,6 +84,7 @@ class SignUpForm extends Component {
                     name='email' 
                     value={this.state.email}
                     onChange={this.handleEmail} />
+                <div> {errors.email} </div>
                 <Input
                     type='password'
                     label='Password'
@@ -68,6 +92,7 @@ class SignUpForm extends Component {
                     name='password'
                     value={this.state.password}
                     onChange={this.handlePassword} />
+                <div> {errors.password} </div>
                 <Input
                     type='password'
                     label='Confirm Password'
@@ -75,6 +100,7 @@ class SignUpForm extends Component {
                     name='confirmPassword' 
                     value={this.state.confirmPassword}
                     onChange={this.handleConfirmPassword} />
+                <div> {errors.confirmPassword} </div>
             </Row>
 
             <Button waves='light'>Sign Up</Button>    
@@ -85,4 +111,8 @@ class SignUpForm extends Component {
     }
 }
 
-export default SignUpForm
+const mapStateToProps = state => ({
+    errors: state.errors
+})
+
+export default connect(mapStateToProps, { userSignUp })(withRouter(SignUpForm))
