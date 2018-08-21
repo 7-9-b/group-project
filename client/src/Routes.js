@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import QuoteForm from './components/Form'
 import SignUpForm from './components/Signup'
@@ -21,11 +21,13 @@ class Routes extends Component {
     render(){
         return(
             <div>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/quoteform" component={QuoteForm} />
-                <Route path="/feed" component={Feed} />
-                <Route path="/signup" component={SignUpForm} />
-                <Route path='/login' component={LogInForm} />
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/quoteform" component={QuoteForm} />
+                    <Route path="/feed" component={Feed} />
+                    <Route path="/signup" component={SignUpForm} />
+                    <Route path='/login' component={LogInForm} />
+                </Switch>
             </div>
         )
     }
