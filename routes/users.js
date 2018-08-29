@@ -1,24 +1,37 @@
-const express = require('express')
-const router = express.Router()
-const User = require('../models/users-model')
-const passport = require('passport')
+const express = require('express');
+const mongoose = require('mongoose');
+const router = express.Router();
+const User = mongoose.model('User');
 
-router.get('/signup', (req, res) => {
-    res.sendStatus(200)
-})
+// SIGNUP
+router.post('/signup', ((req, res) => {
+  let newUser = new User();
+  newUser.email = req.body.userEmail;
+  newUser.setPassword(req.body.userPassword);
+  newUser.save((err, userInfo) => {
+    if(err) {
+      res.sendStatus(500)
+    } else {
+      res.json({token: newUser.generateJWT()})
+    }
+  })
+}))
 
-router.get('/login', (req, res) => {
-    res.sendStatus(200)
-})
+// LOGIN
+router.post('/login', ((req, res) => {
+  User.findOne({email: req.body.userEmail}, ((err, user) => {
+    if(err) {
+      res.send(err)
+    } else if(!user) {
+      res.json('account does not exist')
+    } else {
+      if(user.validatePassword(req.body.userPassword)) {
+        res.json({token: user.generateJWT()})
+      } else {
+        res.json('incorrect password')
+      }
+    }
+  }))
+}))
 
-router.post('/signup', passport.authenticate('signup', {
-    successRedirect: '/login',
-    failureRedirect: '/signup'    
-    }))
-
-router.post('/login', passport.authenticate('login', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-    }))
-
-module.exports = router
+module.exports = router;
